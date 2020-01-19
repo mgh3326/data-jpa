@@ -13,6 +13,7 @@ import study.datajpa.entity.Team;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -146,8 +147,9 @@ class MemberRepositoryTest {
     member.setUsername("member2");
     em.flush(); //Update Query 실행X
   }
+
   @Test
-  public void lock(){
+  public void lock() {
     //given
     memberRepository.save(new Member("member1", 10));
     em.flush();
@@ -155,4 +157,11 @@ class MemberRepositoryTest {
 //when
     Member member = memberRepository.findReadOnlyByUsername("member1");
   }
+
+  @Test
+  public void callCustom() {
+    List<Member> result = memberRepository.findMemberCustom();
+  }
+
+
 }
